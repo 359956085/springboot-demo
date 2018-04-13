@@ -21,7 +21,7 @@ public class CustomUserDetailsService implements UserDetailsService{
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = usermapper.findUserByUsername(username);
 		if (user == null) {
-            throw new UsernameNotFoundException("用户名："+username+"不存在");
+            throw new UsernameNotFoundException("用户名：" + username + "不存在");
 		}
 		//写入用户的角色  ***  切记 由于框架原因 角色名称要以 ROLE_ 开头
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();

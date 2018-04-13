@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<Configuration status="WARN">  
+	<!-- 日志文件目录和压缩文件目录配置 -->
+	<Properties>
+	  <Property name="fileName">d:/logs/springboot_demo_log</Property>
+	  <Property name="fileGz">d:/logs/springboot_demo_log/7z</Property>
+	</Properties>
+	
+    <Appenders>  
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />  
+        </Console>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+			<!-- 输出格式 -->
+			<PatternLayout pattern="[%l] [%t] [%-4r] [%d{yyyy-MM-dd HH:mm:ss,SSS}] [%p] \: %m%n"/>
+		</Console>
+        
+        <!-- 打印出所有的信息，每次大小超过size，则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，作为存档 -->
+		<RollingRandomAccessFile name="infoFile" fileName="${fileName}/web-info.log" immediateFlush="false" 
+			filePattern="${fileGz}/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.web-info.gz">
+			<PatternLayout pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} [%t] %-5level %logger{36} %L %M - %msg%xEx%n"/>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="6" modulate="true"/>
+				<SizeBasedTriggeringPolicy size="50 MB"/>
+			</Policies>
+			<Filters>
+				<!-- 只记录info和warn级别信息 -->
+				<ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL"/>
+				<ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+			</Filters>
+			<!-- 指定每天的最大压缩包个数，默认7个，超过了会覆盖之前的 -->
+			<DefaultRolloverStrate gymax="50"/>
+		</RollingRandomAccessFile>
+		
+		<!-- 存储所有error信息 -->
+		<RollingRandomAccessFile name="errorFile" fileName="${fileName}/web-error.log" immediateFlush="false" 
+			filePattern="${fileGz}/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.web-error.gz">
+			<PatternLayout pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} [%t] %-5level %logger{36} %L %M - %msg%xEx%n"/>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="6" modulate="true"/>
+				<SizeBasedTriggeringPolicy size="50 MB"/>
+			</Policies>
+			<Filters>
+				<!-- 只记录error级别信息 -->
+				<ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+			</Filters>
+			<!-- 指定每天的最大压缩包个数，默认7个，超过了会覆盖之前的 -->
+			<DefaultRolloverStrate gymax="50"/>
+		</RollingRandomAccessFile>  
+    </Appenders>  
+    <Loggers>  
+        <Root level="info">  
+            <AppenderRef ref="Console" />  
+        </Root>  
+        <logger name="org.springframework.web" level="WARN" additivity="false">
+            <appenderRef ref="Console"/>
+        </logger>
+        <logger name="com.mc.core.service" level="WARN" additivity="false">
+            <appender-ref ref="Console"/>
+        </logger>
+        
+        <logger name="com.example.demo.mapper" level="debug" /> 
+    </Loggers>  
+</Configuration>  

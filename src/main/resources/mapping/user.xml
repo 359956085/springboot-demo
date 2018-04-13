@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.demo.mapper.UserMapper">
-	<resultMap type="com.example.demo.entity.User" id="map_user">
-		<id property="userId" column="id"></id>
-	</resultMap>
 
-	<select id="findUserById" resultType="com.example.demo.entity.User">
+	<resultMap type="com.example.demo.entity.User" id="map_user">
+		<id property="userId" column="id"/>
+		<result property="username" column="username" />
+		<result property="password" column="password" />
+		<result property="name" column="name" />
+		<result property="age" column="age" />
+		<result property="isAccountNonExpired" column="isAccountNonExpired" />
+		<result property="isAccountNonLocked" column="isAccountNonLocked" />
+		<result property="isCredentialsNonExpired" column="isCredentialsNonExpired" />
+		<result property="isEnabled" column="isEnabled" />
+	</resultMap>
+	
+	<select id="findUserById" resultMap="map_user">
 		select * from `user` where id = #{arg0 }
 	</select>
 	
-	<select id="findUserByUsername" resultType="com.example.demo.entity.User">
+	<select id="findUserByUsername" resultMap="map_user">
 		select * from `user` where username = #{arg0 }
 	</select>
 
