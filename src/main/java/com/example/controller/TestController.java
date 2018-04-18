@@ -3,7 +3,6 @@ package com.example.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +15,7 @@ import com.example.service.UserService;
 public class TestController {
 	
 	@Autowired private StringRedisTemplate stringRedisTemplate;
-	@Autowired private RedisTemplate<Object, Object> redisTemplate;
+	@Autowired private RedisTemplate<String, Object> redisTemplate;
 	@Autowired UserService userService;
 	
 	public static void main(String[] args) {
@@ -43,5 +42,6 @@ public class TestController {
 		System.out.println(o.getClass());
 		User user = (User)o;
 		System.out.println(user.getName());
+		System.out.println(stringRedisTemplate.opsForValue().get(RedisKeyPrefix.USER + id));
 	}
 }

@@ -3,15 +3,15 @@
 <mapper namespace="com.example.mapper.UserMapper">
 
 	<resultMap type="com.example.entity.User" id="map_user">
-		<id property="userId" column="id"/>
-		<result property="username" column="username" />
-		<result property="password" column="password" />
-		<result property="name" column="name" />
-		<result property="age" column="age" />
-		<result property="isAccountNonExpired" column="isAccountNonExpired" />
-		<result property="isAccountNonLocked" column="isAccountNonLocked" />
-		<result property="isCredentialsNonExpired" column="isCredentialsNonExpired" />
-		<result property="isEnabled" column="isEnabled" />
+		<id property="userId" column="id" javaType="Integer"/>
+		<result property="username" column="username" javaType="String"/>
+		<result property="password" column="password" javaType="String"/>
+		<result property="name" column="name" javaType="String"/>
+		<result property="age" column="age" javaType="Integer"/>
+		<result property="isAccountNonExpired" column="isAccountNonExpired" javaType="Boolean"/>
+		<result property="isAccountNonLocked" column="isAccountNonLocked" javaType="Boolean"/>
+		<result property="isCredentialsNonExpired" column="isCredentialsNonExpired" javaType="Boolean"/>
+		<result property="isEnabled" column="isEnabled" javaType="Boolean"/>
 	</resultMap>
 	
 	<select id="findUserById" resultMap="map_user">
@@ -24,9 +24,39 @@
 
 	<insert id="addUser" parameterType="com.example.entity.User" useGeneratedKeys="true" keyProperty="userId">
 		insert into
-			`user`
-		(name, age, username, password)
+		`user`
+		(`name`, age, username, `password`)
 		values
-			(#{name }, #{age }, #{username }, #{password })
+		(#{name }, #{age }, #{username }, #{password })
 	</insert>
+	
+	<update id="updateUserById" parameterType="com.example.entity.User">
+		update 
+			`user` 
+		<set>
+			<if test="name != null and name != ''">
+				`name` = #{name },
+			</if>
+			<if test="age != null and age != ''">
+				age = #{age },
+			</if>
+			<if test="password != null and password != ''">
+				`password` = #{password },
+			</if>
+			<if test="isAccountNonExpired != null and isAccountNonExpired != ''">
+				isAccountNonExpired = #{isAccountNonExpired },
+			</if>
+			<if test="isAccountNonLocked != null and isAccountNonLocked != ''">
+				isAccountNonLocked	= #{isAccountNonLocked },
+			</if>
+			<if test="isCredentialsNonExpired != null and isCredentialsNonExpired != ''">
+				isCredentialsNonExpired = #{isCredentialsNonExpired },
+			</if>
+			<if test="isEnabled != null and isEnabled != ''">
+				isEnabled = #{isEnabled },
+			</if>
+		</set>
+		where 
+			id = #{userId }
+	</update>
 </mapper>

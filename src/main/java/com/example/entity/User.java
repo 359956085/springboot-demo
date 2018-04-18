@@ -3,6 +3,8 @@ package com.example.entity;
 import java.io.Serializable;
 import java.util.Collection;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.lang.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -13,53 +15,60 @@ public class User implements UserDetails, Serializable{
 
 	private static final long serialVersionUID = -6177197232087121632L;
 	
+	@Id
+	@Nullable
 	Integer userId;
+	@Nullable
 	String username;
+	@Nullable
 	String password;
+	@Nullable
 	String name;
+	@Nullable
 	Integer age;
-	boolean isAccountNonExpired;
-	boolean isAccountNonLocked;
-	boolean isCredentialsNonExpired;
-	boolean isEnabled;
+	@Nullable
+	Boolean isAccountNonExpired;
+	@Nullable
+	Boolean isAccountNonLocked;
+	@Nullable
+	Boolean isCredentialsNonExpired;
+	@Nullable
+	Boolean isEnabled;
+	@Nullable
 	Collection<GrantedAuthority> authorities;
-	
-	
-	
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
 		return authorities;
 	}
+	
 	@Override
 	public String getPassword() {
-		// TODO Auto-generated method stub
 		return password;
 	}
+	
 	@Override
 	public String getUsername() {
-		// TODO Auto-generated method stub
 		return username;
 	}
+	
 	@Override
 	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
 		return isAccountNonExpired;
 	}
+	
 	@Override
 	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
 		return isAccountNonLocked;
 	}
+	
 	@Override
 	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
 		return isCredentialsNonExpired;
 	}
+	
 	@Override
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
 		return isEnabled;
 	}
 	

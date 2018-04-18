@@ -11,15 +11,15 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.example.entity.User;
-import com.example.mapper.UserMapper;
+import com.example.service.UserService;
 
 public class CustomUserDetailsService implements UserDetailsService{
 
-	@Autowired UserMapper usermapper;
+	@Autowired UserService userService;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = usermapper.findUserByUsername(username);
+		User user = userService.findUserByUsername(username);
 		if (user == null) {
             throw new UsernameNotFoundException("用户名：" + username + "不存在");
 		}

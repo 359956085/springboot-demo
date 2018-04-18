@@ -76,6 +76,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
+		<!-- springboot2.0 集成reids 需添加commons-pool2 -->
 		<dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>

@@ -59,6 +59,7 @@
             <appender-ref ref="Console"/>
         </logger>
         
+        <logger name="org.springframework.data.redis" level="debug" /> 
         <logger name="com.example.mapper" level="debug" /> 
     </Loggers>  
 </Configuration>  
