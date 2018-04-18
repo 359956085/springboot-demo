@@ -1,11 +1,11 @@
-package com.example.demo.service;
+package com.example.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.entity.User;
-import com.example.demo.mapper.UserMapper;
+import com.example.entity.User;
+import com.example.mapper.UserMapper;
 
 @Service
 public class UserService {

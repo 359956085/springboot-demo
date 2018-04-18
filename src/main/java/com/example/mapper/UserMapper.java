@@ -1,7 +1,10 @@
-package com.example.demo.mapper;
+package com.example.mapper;
 
-import com.example.demo.entity.User;
+import org.apache.ibatis.annotations.Mapper;
 
+import com.example.entity.User;
+
+@Mapper
 public interface UserMapper {
 
 	User findUserById(Integer id);

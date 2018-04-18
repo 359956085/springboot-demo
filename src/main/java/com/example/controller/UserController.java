@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.controller;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,16 +10,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.entity.User;
-import com.example.demo.service.UserService;
+import com.example.entity.User;
+import com.example.service.UserService;
 
 @RestController
 @RequestMapping(value = "/user")
-@EnableWebSecurity
 public class UserController {
 	
-	@Autowired
-	UserService userService;
+	@Autowired UserService userService;
 	
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET)
@@ -39,5 +37,6 @@ public class UserController {
 		}
 		return map;
 	}
+	
 	
 }

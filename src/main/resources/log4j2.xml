@@ -59,6 +59,6 @@
             <appender-ref ref="Console"/>
         </logger>
         
-        <logger name="com.example.demo.mapper" level="debug" /> 
+        <logger name="com.example.mapper" level="debug" /> 
     </Loggers>  
 </Configuration>  

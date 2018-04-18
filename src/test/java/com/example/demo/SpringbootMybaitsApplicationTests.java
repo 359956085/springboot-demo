@@ -12,5 +12,5 @@ public class SpringbootMybaitsApplicationTests {
 	@Test
 	public void contextLoads() {
 	}
-
+	
 }

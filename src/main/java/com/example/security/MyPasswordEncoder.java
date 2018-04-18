@@ -1,4 +1,4 @@
-package com.example.demo.security;
+package com.example.security;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
