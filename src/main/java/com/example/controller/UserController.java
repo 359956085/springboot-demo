@@ -19,12 +19,21 @@ import com.example.service.UserService;
 public class UserController {
 	
 	private static Logger log = LogManager.getLogger(UserController.class);
+	
 	@Autowired UserService userService;
 	
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.GET)
-	public User getUser(Integer id) {
-		return userService.findUserById(id);
+	public Map<String, Object> getUser(Integer id) {
+		Map<String, Object> map = new HashMap<>();
+		try {
+			map.put("error_code", "0");
+			map.put("user", userService.findUserById(id));
+		} catch (Exception e) {
+			map.put("error_code", "1000");
+			log.error(e);
+		}
+		return map;
 	}
 	
 	@ResponseBody

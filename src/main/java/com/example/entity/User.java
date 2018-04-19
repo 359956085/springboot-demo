@@ -37,6 +37,26 @@ public class User implements UserDetails, Serializable{
 	@Nullable
 	Collection<GrantedAuthority> authorities;
 	
+	public User() {
+		
+	}
+	
+	public User(Integer userId, String username, String password, String name, Integer age, Boolean isAccountNonExpired,
+			Boolean isAccountNonLocked, Boolean isCredentialsNonExpired, Boolean isEnabled,
+			Collection<GrantedAuthority> authorities) {
+		super();
+		this.userId = userId;
+		this.username = username;
+		this.password = password;
+		this.name = name;
+		this.age = age;
+		this.isAccountNonExpired = isAccountNonExpired;
+		this.isAccountNonLocked = isAccountNonLocked;
+		this.isCredentialsNonExpired = isCredentialsNonExpired;
+		this.isEnabled = isEnabled;
+		this.authorities = authorities;
+	}
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return authorities;
@@ -71,5 +91,7 @@ public class User implements UserDetails, Serializable{
 	public boolean isEnabled() {
 		return isEnabled;
 	}
+
+
 	
 }
